@@ -18,7 +18,7 @@ In an assignment, the thing on the left is a _variable_ and the thing on the rig
 
 Primitive types
 ---------------------
-These are `number`, `boolean`, `string`, `function`.
+These are `number`, `boolean`, `string`, `function`typoe.
 The first 3 are selected automatically when I assign to a variable.
 * `foo = 3` would cause `foo` to be a `number`
 * `foo = true` => foo is a boolean
@@ -27,6 +27,11 @@ The first 3 are selected automatically when I assign to a variable.
 The last must be explicitly created using the `function` keyword, in one of two ways:
 * `foo = function() { console.log("hello world") };`
 * `function foo() { console.log("hello world") };`
+
+You can get the type of a variable by using the `typeof` operator:
+* `typeof true // "boolean"`
+* `typeof 3 // "number"`
+* `typeof function () { } // "function"`
 
 Booleans
 -------------
@@ -89,7 +94,7 @@ Functions: return values
 Most functions have return values. This can be thought of as the output of the function:
 
     function convertToGreeting(thing) { 
-	return "hello "+thing; 
+        return "hello "+thing; 
     }
     var newgreeting = convertToGreeting("train");
     console.log(newgreeting); // prints “hello train”;

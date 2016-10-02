@@ -11,18 +11,18 @@ In an assignment, the thing on the left is a _variable_ and the thing on the rig
 
 `foo = bar` means: assign the value held by the variable `bar` to the variable `foo`.
 
-`foo = myfn()` means: assign the return value of calling `myfn` to the variable `foo`"
+`foo = myfn()` means: assign the return value of calling `myfn` to the variable `foo`.
 
 `foo = myfn` means: assign the function called `myfn` to the variable `foo`.
 
 
 Primitive types
 ---------------------
-These are `number`, `boolean`, `string`, `function`
+These are `number`, `boolean`, `string`, `function`.
 The first 3 are selected automatically when I assign to a variable.
 * `foo = 3` would cause `foo` to be a `number`
-* `foo = true` => boolean
-* `foo = "hello"` => string
+* `foo = true` => foo is a boolean
+* `foo = "hello"` => foo is a string
 
 The last must be explicitly created using the `function` keyword, in one of two ways:
 * `foo = function() { console.log("hello world") };`
@@ -73,23 +73,33 @@ Functions can be given parameters:
 	myfunction2("good evening"); // prints “good evening world”
 	
 We say the variable `greeting` is bound in the function `myfunction2`. When `myfunction("good evening");` is run, `greeting` is bound to the value “good evening”.
+
 You can have multiple parameters: 
 
     function myfunction3(param1, param2) { }
+    
+Functions can also be treated as values, like so:
+
+    var myFn = function () { console.log("Hello"); }
+    var stillMyFn = myFn;
+    stillMyFn(); // prints "Hello"
 
 Functions: return values
 -----------------------
 Most functions have return values. This can be thought of as the output of the function:
 
     function convertToGreeting(thing) { 
-	    return "hello "+thing; 
-	}
+	return "hello "+thing; 
+    }
     var newgreeting = convertToGreeting("train");
     console.log(newgreeting); // prints “hello train”;
 
 Scope
 -----
+N.B.: This is only vaguely related to angular's `$scope`! `$scope` is an `object` containing all variables that can be accessed from a template. This section is about the concept of `scope`.
+
 Scope is the list of variables that are available in a section of code.
+
 There are two scopes: global and local.
 To add to the global scope, assign to a variable without first declaring it with `var`:
 
@@ -140,17 +150,15 @@ Modifying variables in a parent scope is called _stateful programming_. The oppo
     function run() {
         return "running";
     }
-    var mystatevariable = init();
-    console.log(mystatevariable);
-    mystatevariable = run();
-    console.log(mystatevariable);
+    console.log(init());
+    console.log(run());
 
 Shadowing
 ---------------
 A common source of bugs:
 
-	var myvar;
-	function run() {
+    var myvar;
+    function run() {
         var myvar = "running";
         console.log(myvar); // prints "running"
     }
@@ -161,8 +169,8 @@ Here, when `myvar` is assigned to in the function, we are not touching the `myva
 
 The fix:
 
-	var myvar;
-	function run() {
+    var myvar;
+    function run() {
         myvar = "running";
         console.log(myvar); // prints "running"
     }
@@ -177,8 +185,8 @@ Lots of UI javascript programming relies on events. This is because it is the ma
 
 	myElement.on("click", handler)
 	function handler() {
-		console.log("clicked");
-		return 3;
+	    console.log("clicked");
+	    return 3;
 	}
 
 Here you are calling the `on` function of `myElement`, passing it the event name `"click"` and the function called `handler`.
